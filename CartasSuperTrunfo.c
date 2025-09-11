@@ -10,64 +10,72 @@ int main() {
     float densipopu1, densipopu2;
     float pibpercapita1, pibpercapita2;
 
-    printf("Digite o nome da primeira cidade:\n");
-    fgets(cidade1, sizeof(cidade1), stdin);
-    cidade1[strcspn(cidade1, "\n")] = '\0'; 
-    
-    printf("Digite o seu código:\n");
+    // Lendo primeira cidade
+    printf("Digite o nome da primeira cidade: ");
+    fgets(cidade1, 50, stdin);
+    cidade1[strcspn(cidade1, "\n")] = '\0'; // remove o \n
+
+    printf("Codigo da cidade: ");
     scanf("%d", &codigo1);
 
-    printf("Digite a populacao:\n");
+    printf("Populacao: ");
     scanf("%d", &populacao1);
 
-    printf("Digite a area:\n");
+    printf("Area (km2): ");
     scanf("%f", &area1);
 
-    printf("Digite o PIB:\n");
+    printf("PIB: ");
     scanf("%f", &pib1);
 
-    printf("Digite a quantidade de pontos turisticos:\n");
+    printf("Quantidade de pontos turisticos: ");
     scanf("%d", &p_turisticos1);
 
-    getchar(); // limpa o Enter pendente
-    
-    printf("\nDigite o nome da segunda cidade:\n");
-    fgets(cidade2, sizeof(cidade2), stdin);
-    cidade2[strcspn(cidade2, "\n")] = '\0'; 
-    
-    printf("Digite o seu código:\n");
+    getchar(); // limpa buffer para o próximo fgets
+
+    // Lendo segunda cidade
+    printf("\nDigite o nome da segunda cidade: ");
+    fgets(cidade2, 50, stdin);
+    cidade2[strcspn(cidade2, "\n")] = '\0';
+
+    printf("Codigo da cidade: ");
     scanf("%d", &codigo2);
 
-    printf("Digite a populacao:\n");
+    printf("Populacao: ");
     scanf("%d", &populacao2);
 
-    printf("Digite a area:\n");
+    printf("Area (km2): ");
     scanf("%f", &area2);
 
-    printf("Digite o PIB:\n");
+    printf("PIB: ");
     scanf("%f", &pib2);
 
-    printf("Digite a quantidade de pontos turisticos:\n");
+    printf("Quantidade de pontos turisticos: ");
     scanf("%d", &p_turisticos2);
 
-    // cálculos corretos
-    densipopu1 = (float) populacao1 / area1;
-    densipopu2 = (float) populacao2 / area2;
-    pibpercapita1 = (float) pib1 / populacao1;
-    pibpercapita2 = (float) pib2 / populacao2;
+    // Cálculos
+    densipopu1 = populacao1 / area1;
+    densipopu2 = populacao2 / area2;
 
-    printf("\nDados da primeira cidade:\n");
-    printf("Nome: %s\nCodigo: %d\nPopulacao: %d\nArea: %.2f\nPIB: %.2f\nPontos Turisticos: %d\nDensidade Populacional: %.2f hab/km²\nPIB per capita: %.2f\n",
-        cidade1, codigo1, populacao1, area1, pib1, p_turisticos1, densipopu1, pibpercapita1);
+    pibpercapita1 = pib1 / populacao1;
+    pibpercapita2 = pib2 / populacao2;
 
-    printf("\nDados da segunda cidade:\n");
-    printf("Nome: %s\nCodigo: %d\nPopulacao: %d\nArea: %.2f\nPIB: %.2f\nPontos Turisticos: %d\nDensidade Populacional: %.2f hab/km²\nPIB per capita: %.2f\n",
-        cidade2, codigo2, populacao2, area2, pib2, p_turisticos2, densipopu2, pibpercapita2);
+    // Resultados organizados
+    printf("\n===== RESULTADOS =====\n");
+    printf("Cidade: %s (Codigo %d)\n", cidade1, codigo1);
+    printf(" Populacao: %d\n", populacao1);
+    printf(" Area: %.2f km2\n", area1);
+    printf(" PIB: %.2f\n", pib1);
+    printf(" Pontos turisticos: %d\n", p_turisticos1);
+    printf(" Densidade populacional: %.2f hab/km2\n", densipopu1);
+    printf(" PIB per capita: %.2f\n", pibpercapita1);
+
+    printf("\nCidade: %s (Codigo %d)\n", cidade2, codigo2);
+    printf(" Populacao: %d\n", populacao2);
+    printf(" Area: %.2f km2\n", area2);
+    printf(" PIB: %.2f\n", pib2);
+    printf(" Pontos turisticos: %d\n", p_turisticos2);
+    printf(" Densidade populacional: %.2f hab/km2\n", densipopu2);
+    printf(" PIB per capita: %.2f\n", pibpercapita2);
 
     return 0;
 }
-
-
-
-
-
