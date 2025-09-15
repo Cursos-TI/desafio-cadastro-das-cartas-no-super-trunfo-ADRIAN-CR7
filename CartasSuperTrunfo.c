@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
+
 int main() {
+    
     char cidade1[50], cidade2[50];
     int populacao1, populacao2, codigo1, codigo2;
     float area1, area2;
@@ -12,8 +14,8 @@ int main() {
 
     // Lendo primeira cidade
     printf("Digite o nome da primeira cidade: ");
-    fgets(cidade1, 50, stdin);
-    cidade1[strcspn(cidade1, "\n")] = '\0'; // remove o \n
+    fgets(cidade1, sizeof(cidade1), stdin);
+    cidade1[strcspn(cidade1, "\n")] = '\0';
 
     printf("Codigo da cidade: ");
     scanf("%d", &codigo1);
@@ -30,11 +32,11 @@ int main() {
     printf("Quantidade de pontos turisticos: ");
     scanf("%d", &p_turisticos1);
 
-    getchar(); // limpa buffer para o próximo fgets
+    getchar(); // limpa buffer antes de ler a próxima cidade
 
-    // Lendo segunda cidade
+    //  Lendo segunda cidade 
     printf("\nDigite o nome da segunda cidade: ");
-    fgets(cidade2, 50, stdin);
+    fgets(cidade2, sizeof(cidade2), stdin);
     cidade2[strcspn(cidade2, "\n")] = '\0';
 
     printf("Codigo da cidade: ");
@@ -52,30 +54,64 @@ int main() {
     printf("Quantidade de pontos turisticos: ");
     scanf("%d", &p_turisticos2);
 
-    // Cálculos
-    densipopu1 = populacao1 / area1;
+    //  Cálculos 
+    densipopu1 = populacao1 / area1; 
     densipopu2 = populacao2 / area2;
 
     pibpercapita1 = pib1 / populacao1;
     pibpercapita2 = pib2 / populacao2;
 
-    // Resultados organizados
-    printf("\n===== RESULTADOS =====\n");
-    printf("Cidade: %s (Codigo %d)\n", cidade1, codigo1);
-    printf(" Populacao: %d\n", populacao1);
-    printf(" Area: %.2f km2\n", area1);
-    printf(" PIB: %.2f\n", pib1);
-    printf(" Pontos turisticos: %d\n", p_turisticos1);
-    printf(" Densidade populacional: %.2f hab/km2\n", densipopu1);
-    printf(" PIB per capita: %.2f\n", pibpercapita1);
+    //  Comparações 
+    printf("\n===== BATALHA DE CIDADES =====\n");
 
-    printf("\nCidade: %s (Codigo %d)\n", cidade2, codigo2);
-    printf(" Populacao: %d\n", populacao2);
-    printf(" Area: %.2f km2\n", area2);
-    printf(" PIB: %.2f\n", pib2);
-    printf(" Pontos turisticos: %d\n", p_turisticos2);
-    printf(" Densidade populacional: %.2f hab/km2\n", densipopu2);
-    printf(" PIB per capita: %.2f\n", pibpercapita2);
+    // População
+    if (populacao1 > populacao2)
+        printf("Populacao: %s vence!\n", cidade1);
+    else if (populacao2 > populacao1)
+        printf("Populacao: %s vence!\n", cidade2);
+    else
+        printf("Populacao: Empate\n");
+
+    // Área
+    if (area1 > area2)
+        printf("Area: %s vence!\n", cidade1);
+    else if (area2 > area1)
+        printf("Area: %s vence!\n", cidade2);
+    else
+        printf("Area: Empate\n");
+
+    // PIB
+    if (pib1 > pib2)
+        printf("PIB: %s vence!\n", cidade1);
+    else if (pib2 > pib1)
+        printf("PIB: %s vence!\n", cidade2);
+    else
+        printf("PIB: Empate\n");
+
+    // PIB per capita
+    if (pibpercapita1 > pibpercapita2)
+        printf("PIB per capita: %s vence!\n", cidade1);
+    else if (pibpercapita2 > pibpercapita1)
+        printf("PIB per capita: %s vence!\n", cidade2);
+    else
+        printf("PIB per capita: Empate\n");
+
+    // Densidade populacional
+    if (densipopu1 > densipopu2)
+        printf("Densidade populacional: %s vence!\n", cidade1);
+    else if (densipopu2 > densipopu1)
+        printf("Densidade populacional: %s vence!\n", cidade2);
+    else
+        printf("Densidade populacional: Empate\n");
+
+    // Pontos turísticos
+    if (p_turisticos1 > p_turisticos2)
+        printf("Pontos turisticos: %s vence!\n", cidade1);
+    else if (p_turisticos2 > p_turisticos1)
+        printf("Pontos turisticos: %s vence!\n", cidade2);
+    else
+        printf("Pontos turisticos: Empate\n");
+
 
     return 0;
 }
