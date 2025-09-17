@@ -1,117 +1,61 @@
 #include <stdio.h>
-#include <string.h>
 
+// Função para retornar o valor do atributo escolhido
+float valorAtributo(int opcao, float pop, float area, float pib, float tur, float dens) {
+    switch(opcao) {
+        case 1: return pop;
+        case 2: return area;
+        case 3: return pib;
+        case 4: return tur;
+        case 5: return dens;
+        default: return 0;
+    }
+}
 
 int main() {
-    
-    char cidade1[50], cidade2[50];
-    int populacao1, populacao2, codigo1, codigo2;
-    float area1, area2;
-    float pib1, pib2;
-    int p_turisticos1, p_turisticos2;
+    // Valores das cidades
+    char cidade1[] = "Cidade A";
+    char cidade2[] = "Cidade B";
+
+    int populacao1 = 500000, populacao2 = 450000;
+    float area1 = 250.5, area2 = 180.0;
+    float pib1 = 15000.0, pib2 = 16000.0;
+    int p_turisticos1 = 10, p_turisticos2 = 20;
     float densipopu1, densipopu2;
-    float pibpercapita1, pibpercapita2;
 
-    // Lendo primeira cidade
-    printf("Digite o nome da primeira cidade: ");
-    fgets(cidade1, sizeof(cidade1), stdin);
-    cidade1[strcspn(cidade1, "\n")] = '\0';
+    int atributo1, atributo2;
 
-    printf("Codigo da cidade: ");
-    scanf("%d", &codigo1);
-
-    printf("Populacao: ");
-    scanf("%d", &populacao1);
-
-    printf("Area (km2): ");
-    scanf("%f", &area1);
-
-    printf("PIB: ");
-    scanf("%f", &pib1);
-
-    printf("Quantidade de pontos turisticos: ");
-    scanf("%d", &p_turisticos1);
-
-    getchar(); // limpa buffer antes de ler a próxima cidade
-
-    //  Lendo segunda cidade 
-    printf("\nDigite o nome da segunda cidade: ");
-    fgets(cidade2, sizeof(cidade2), stdin);
-    cidade2[strcspn(cidade2, "\n")] = '\0';
-
-    printf("Codigo da cidade: ");
-    scanf("%d", &codigo2);
-
-    printf("Populacao: ");
-    scanf("%d", &populacao2);
-
-    printf("Area (km2): ");
-    scanf("%f", &area2);
-
-    printf("PIB: ");
-    scanf("%f", &pib2);
-
-    printf("Quantidade de pontos turisticos: ");
-    scanf("%d", &p_turisticos2);
-
-    //  Cálculos 
-    densipopu1 = populacao1 / area1; 
+    // Calcula densidade populacional
+    densipopu1 = populacao1 / area1;
     densipopu2 = populacao2 / area2;
 
-    pibpercapita1 = pib1 / populacao1;
-    pibpercapita2 = pib2 / populacao2;
+    // Mostra os valores das cidades
+    printf("Valores das cidades:\n");
+    printf("%s: Populacao=%d, Area=%.2f, PIB=%.2f, Pontos turisticos=%d, Densidade=%.2f\n",
+           cidade1, populacao1, area1, pib1, p_turisticos1, densipopu1);
+    printf("%s: Populacao=%d, Area=%.2f, PIB=%.2f, Pontos turisticos=%d, Densidade=%.2f\n\n",
+           cidade2, populacao2, area2, pib2, p_turisticos2, densipopu2);
 
-    //  Comparações 
-    printf("\n===== BATALHA DE CIDADES =====\n");
+    // Menu para escolher atributos
+    printf("Escolha dois atributos para comparar e somar (1 a 5):\n");
+    printf("1 - População\n2 - Área\n3 - PIB\n4 - Pontos turísticos\n5 - Densidade populacional\n");
+    printf("Primeiro atributo: "); scanf("%d", &atributo1);
+    printf("Segundo atributo: "); scanf("%d", &atributo2);
 
-    // População
-    if (populacao1 > populacao2)
-        printf("Populacao: %s vence!\n", cidade1);
-    else if (populacao2 > populacao1)
-        printf("Populacao: %s vence!\n", cidade2);
-    else
-        printf("Populacao: Empate\n");
+    // Calcula soma dos atributos escolhidos
+    float soma1 = valorAtributo(atributo1, populacao1, area1, pib1, p_turisticos1, densipopu1) +
+                  valorAtributo(atributo2, populacao1, area1, pib1, p_turisticos1, densipopu1);
 
-    // Área
-    if (area1 > area2)
-        printf("Area: %s vence!\n", cidade1);
-    else if (area2 > area1)
-        printf("Area: %s vence!\n", cidade2);
-    else
-        printf("Area: Empate\n");
+    float soma2 = valorAtributo(atributo1, populacao2, area2, pib2, p_turisticos2, densipopu2) +
+                  valorAtributo(atributo2, populacao2, area2, pib2, p_turisticos2, densipopu2);
 
-    // PIB
-    if (pib1 > pib2)
-        printf("PIB: %s vence!\n", cidade1);
-    else if (pib2 > pib1)
-        printf("PIB: %s vence!\n", cidade2);
-    else
-        printf("PIB: Empate\n");
+    // Mostra resultado
+    printf("\nSoma da Cidade 1: %.2f\n", soma1);
+    printf("Soma da Cidade 2: %.2f\n", soma2);
 
-    // PIB per capita
-    if (pibpercapita1 > pibpercapita2)
-        printf("PIB per capita: %s vence!\n", cidade1);
-    else if (pibpercapita2 > pibpercapita1)
-        printf("PIB per capita: %s vence!\n", cidade2);
-    else
-        printf("PIB per capita: Empate\n");
-
-    // Densidade populacional
-    if (densipopu1 > densipopu2)
-        printf("Densidade populacional: %s vence!\n", cidade1);
-    else if (densipopu2 > densipopu1)
-        printf("Densidade populacional: %s vence!\n", cidade2);
-    else
-        printf("Densidade populacional: Empate\n");
-
-    // Pontos turísticos
-    if (p_turisticos1 > p_turisticos2)
-        printf("Pontos turisticos: %s vence!\n", cidade1);
-    else if (p_turisticos2 > p_turisticos1)
-        printf("Pontos turisticos: %s vence!\n", cidade2);
-    else
-        printf("Pontos turisticos: Empate\n");
-
+    if (soma1 > soma2) printf("Cidade 1 venceu pela soma dos atributos!\n");
+    else if (soma1 < soma2) printf("Cidade 2 venceu pela soma dos atributos!\n");
+    else printf("Empate na soma dos atributos!\n");
 
     return 0;
 }
